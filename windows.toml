@@ -1,0 +1,8 @@
+# Windows-only additions to config.toml. Herdr has no include mechanism, and these settings
+# would break the Mac, so scripts\windows-startup\herdr-config.ps1 merges this file into
+# config.toml and writes the result to %APPDATA%\herdr\config.toml (where Herdr reads its
+# config on Windows). A key here replaces the same key in the same table of config.toml;
+# other keys are added to that table; tables config.toml lacks are appended.
+
+[terminal]
+default_shell = "cmd.exe"                 # Herdr defaults to PowerShell on Windows; Clink gives cmd its prompt

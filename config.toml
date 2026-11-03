@@ -1,0 +1,64 @@
+# Herdr config (trial as a tmux replacement), kept in the configs repo.
+# Mac: ~/.config/herdr/config.toml is a symlink to this file. Only this file is shared: Herdr keeps
+# installed plugins (with compiled binaries) in ~/.config/herdr/plugins, per machine.
+# Keys follow the tmux setup (config/tmux/tmux.conf) so habits carry over.
+# Windows: Herdr reads %APPDATA%\herdr\config.toml, which scripts/windows-startup/herdr-config.ps1
+# writes from this file plus windows.toml (Windows-only settings, e.g. cmd as the pane shell).
+# Reload after editing: prefix r (or `herdr server reload-config`). Check: `herdr config check`.
+
+onboarding = false                        # skip the first-run welcome screen
+
+[keys]
+prefix = "ctrl+a"                         # as in tmux
+
+split_vertical = "prefix+|"               # side by side, as tmux prefix |
+split_horizontal = "prefix+minus"         # one above the other, as tmux prefix -
+zoom = ["prefix+m", "prefix+z"]           # tmux used prefix m
+close_pane = "prefix+x"
+clear_pane = "prefix+ctrl+k"              # clear pane + scrollback, as tmux prefix C-k
+detach = ["prefix+d", "prefix+q"]         # tmux used prefix d
+reload_config = "prefix+r"                # as tmux prefix r
+resize_mode = "prefix+shift+r"            # Herdr's default prefix+r is reload above
+
+# Agents (unset by default): step through the agents in the sidebar, or jump to one by number
+next_agent = "prefix+."
+previous_agent = "prefix+,"
+focus_agent = "prefix+alt+1..9"           # left Option is Alt in Ghostty
+
+# Ctrl-h/j/k/l move between panes and Neovim splits (plugin below), so prefix h/j/k/l resize,
+# as in tmux; prefix + arrows also move between panes.
+resize_pane_left = "prefix+h"
+resize_pane_down = "prefix+j"
+resize_pane_up = "prefix+k"
+resize_pane_right = "prefix+l"
+focus_pane_left = "prefix+left"
+focus_pane_down = "prefix+down"
+focus_pane_up = "prefix+up"
+focus_pane_right = "prefix+right"
+
+# Ctrl-h/j/k/l across Herdr panes and Neovim splits: the jsheely/herdr-vim-navigation plugin
+# (vim-tmux-navigator for Herdr; source reviewed, installed at commit eba4a9c). Neovim's side is
+# in the Neovim config (lua/martin/plugins/init.lua).
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "jsheely.vim-navigation.left"
+description = "navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "jsheely.vim-navigation.down"
+description = "navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "jsheely.vim-navigation.up"
+description = "navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "jsheely.vim-navigation.right"
+description = "navigate right (vim/herdr)"
